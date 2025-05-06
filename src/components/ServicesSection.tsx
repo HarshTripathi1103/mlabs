@@ -62,13 +62,14 @@ const ServicesSection: React.FC = () => {
   return (
     <section id="services" className="px-6 md:px-12 py-16" ref={sectionRef}>
       <motion.div 
-        className="grid grid-cols-1 md:grid-cols-3 gap-12"
+        className="flex flex-col lg:flex-row lg:gap-12"
         variants={containerVariants}
         initial="hidden"
         animate={controls}
       >
+        {/* Left content at the top for md screens and left side for lg+ screens */}
         <motion.div 
-          className="col-span-1 flex flex-col" 
+          className="w-full lg:w-1/3 mb-12 lg:mb-0" 
           variants={leftVariants}
         >
           {/* Use WordsPullUp with proper props */}
@@ -86,7 +87,7 @@ const ServicesSection: React.FC = () => {
               text="We focus on the data that is really important for making each of our decisions, constantly testing, configuring and optimizing processes."
               inView={isInView}
               className="text-gray-800 text-base"
-              justify="start"
+              justify="start" 
             />
           </div>
           
@@ -106,8 +107,9 @@ const ServicesSection: React.FC = () => {
           </motion.div>
         </motion.div>
         
+        {/* Cards now below the header content on md screens and right side on lg+ screens */}
         <motion.div 
-          className="col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6 grid-auto-rows-auto" 
+          className="w-full lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-6" 
           variants={rightVariants}
         >
           {/* Map through service cards */}
@@ -115,7 +117,7 @@ const ServicesSection: React.FC = () => {
             {
               title: "Social Ads",
               description: "We create authentic content that delivers true value to your audience.",
-              className: "bg-[#FAF8F4]"
+              className: "bg-[#FAF8F4] h-full"
             },
             {
               title: "SaaS marketing",
@@ -125,7 +127,7 @@ const ServicesSection: React.FC = () => {
             {
               title: "Content marketing",
               description: "Our content experts will create a digital marketing strategy.",
-              className: "bg-[#1a1a1a] border-[#1a1a1a] sm:row-span-2 h-full",
+              className: "bg-[#1a1a1a] border-[#1a1a1a]",
               darkMode: true,
               icon: (
                 <div className="w-full h-56 relative overflow-hidden">
@@ -163,7 +165,7 @@ const ServicesSection: React.FC = () => {
                   <WordsPullUp 
                     text={card.title} 
                     inView={isInView} 
-                    className={` ${card.darkMode ? 'text-white' : 'text-gray-900'}`}
+                    className={`${card.darkMode ? 'text-white' : 'text-gray-900'}`}
                     justify="start" 
                   />
                 }

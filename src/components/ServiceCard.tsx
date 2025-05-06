@@ -20,14 +20,12 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       {icon}
       <div className="p-6">
         <div className="flex items-center mb-4">
-          {/* Render title differently based on type */}
           {typeof title === 'string' ? (
             <h3 className="text-[40px] font-bold md:pt-16">{title}</h3>
           ) : (
             <div className="text-[40px] font-bold md:pt-16">{title}</div>
           )}
         </div>
-        {/* Render description differently based on type */}
         {typeof description === 'string' ? (
           <p className={darkMode ? 'text-gray-300' : 'text-gray-700'}>{description}</p>
         ) : (
