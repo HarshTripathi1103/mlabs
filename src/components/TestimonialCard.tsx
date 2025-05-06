@@ -117,11 +117,11 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
             exit="exit"
             transition={{
               type: "spring",
-              stiffness: 200, // Reduced from 300 for slower motion
-              damping: 25, // Adjusted for smoother animation
-              mass: 1.2, // Added mass to make it feel heavier/slower
-              duration: 0.8, // Increased from 0.5 for slower animation
-              delay: 0.1 // Small delay before animation starts
+              stiffness: 200, 
+              damping: 25, 
+              mass: 1.2, 
+              duration: 0.8, 
+              delay: 0.1 
             }}
             className="flex flex-col h-full"
           >

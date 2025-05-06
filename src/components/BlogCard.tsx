@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 interface BlogCardProps {
   title: string;
   category: string;
@@ -15,8 +16,10 @@ const BlogCard: React.FC<BlogCardProps> = ({
   imageSrc,
   imageBackground
 }) => {
+  // Removed animation variants for hover
+
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden"> 
       <div className="relative mb-8">
         <div className={`rounded-3xl overflow-hidden ${imageBackground || ''} max-w-2xl mx-auto`}>
           <img 
