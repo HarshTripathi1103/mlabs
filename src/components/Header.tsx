@@ -1,18 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('');
-  
-  // Track scroll position to determine active section
+  const [activeSection, setActiveSection] = useState("");
+
   useEffect(() => {
     const handleScroll = () => {
-      // Get all sections
-      const sections = ['services', 'results', 'faq', 'blog'];
-      // Find which section is currently in view
-      const current = sections.find(section => {
+      const sections = ["services", "results", "faq", "blog"];
+
+      const current = sections.find((section) => {
         const element = document.getElementById(section);
         if (element) {
           const rect = element.getBoundingClientRect();
@@ -20,141 +18,145 @@ const Header: React.FC = () => {
         }
         return false;
       });
-      
+
       if (current) {
         setActiveSection(current);
       } else if (window.scrollY < 100) {
         // Near the top of the page
-        setActiveSection('');
+        setActiveSection("");
       }
     };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  
-  // Close mobile menu when clicking outside
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
-      const mobileMenu = document.getElementById('mobile-menu');
-      
-      if (isMobileMenuOpen && mobileMenu && !mobileMenu.contains(target) && 
-          !target.closest('button[aria-label="Toggle menu"]')) {
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      if (
+        isMobileMenuOpen &&
+        mobileMenu &&
+        !mobileMenu.contains(target) &&
+        !target.closest('button[aria-label="Toggle menu"]')
+      ) {
         setIsMobileMenuOpen(false);
       }
     };
-    
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
+
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
   }, [isMobileMenuOpen]);
-  
-  // Disable body scroll when mobile menu is open
+
   useEffect(() => {
     if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
     }
-    
+
     return () => {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
     };
   }, [isMobileMenuOpen]);
 
   // Animation variants
   const navItemVariants = {
     initial: { opacity: 0, y: -5 },
-    animate: (i: number) => ({ 
-      opacity: 1, 
+    animate: (i: number) => ({
+      opacity: 1,
       y: 0,
-      transition: { 
+      transition: {
         delay: 0.05 * i,
-        duration: 0.2
-      }
+        duration: 0.2,
+      },
     }),
-    hover: { 
+    hover: {
       scale: 1.05,
-      transition: { duration: 0.2 } 
-    }
+      transition: { duration: 0.2 },
+    },
   };
 
   const mobileMenuVariants = {
-    closed: { 
+    closed: {
       opacity: 0,
       y: -20,
-      transition: { 
+      transition: {
         duration: 0.3,
-        ease: [0.4, 0.0, 0.2, 1]
-      }
+        ease: [0.4, 0.0, 0.2, 1],
+      },
     },
-    open: { 
+    open: {
       opacity: 1,
       y: 0,
-      transition: { 
+      transition: {
         duration: 0.4,
-        ease: [0, 0, 0.2, 1]
-      }
-    }
+        ease: [0, 0, 0.2, 1],
+      },
+    },
   };
 
   const mobileNavItemVariants = {
     closed: { opacity: 0, x: -10 },
-    open: (i: number) => ({ 
-      opacity: 1, 
+    open: (i: number) => ({
+      opacity: 1,
       x: 0,
-      transition: { 
+      transition: {
         delay: 0.1 * i,
-        duration: 0.3
-      }
-    })
+        duration: 0.3,
+      },
+    }),
   };
-  
+
   const buttonVariants = {
     initial: { opacity: 0, scale: 0.9 },
-    animate: { 
-      opacity: 1, 
+    animate: {
+      opacity: 1,
       scale: 1,
-      transition: { 
+      transition: {
         delay: 0.4,
         type: "spring",
         stiffness: 200,
-        damping: 15
-      }
+        damping: 15,
+      },
     },
-    hover: { 
+    hover: {
       scale: 1.05,
-      transition: { duration: 0.2 } 
+      transition: { duration: 0.2 },
     },
-    tap: { scale: 0.95 }
+    tap: { scale: 0.95 },
   };
 
   const menuIconVariants = {
     open: { rotate: 90 },
-    closed: { rotate: 0 }
+    closed: { rotate: 0 },
   };
 
   const navItems = [
     { href: "#services", label: "Services" },
     { href: "#results", label: "Results" },
     { href: "#faq", label: "FAQ" },
-    { href: "#blog", label: "Blog" }
+    { href: "#blog", label: "Blog" },
   ];
 
-  // Smooth scroll to section function
-  const handleNavClick = (section: string, event: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleNavClick = (
+    section: string,
+    event: React.MouseEvent<HTMLAnchorElement>,
+  ) => {
     event.preventDefault();
-    
+
     setActiveSection(section);
-    
+
     const targetElement = document.getElementById(section);
     if (targetElement) {
       window.scrollTo({
-        top: targetElement.offsetTop - 100, // Offset for header height
-        behavior: 'smooth'
+        top: targetElement.offsetTop - 100,
+        behavior: "smooth",
       });
     }
-    
+
     if (isMobileMenuOpen) {
       setIsMobileMenuOpen(false);
     }
@@ -162,23 +164,21 @@ const Header: React.FC = () => {
 
   return (
     <header className="sticky top-0 z-50 pb-8 px-6 md:px-12 bg-transparent">
-      <motion.div 
+      <motion.div
         className="flex items-center justify-between bg-[#FAF8F4]/95 backdrop-blur-sm rounded-xl p-4 relative "
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        {/* Logo with hover effect */}
-        <motion.div 
+        <motion.div
           className="font-bold text-3xl"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
           MLab
         </motion.div>
-        
-        {/* Mobile menu button */}
-        <motion.button 
+
+        <motion.button
           className="md:hidden relative z-50 p-2"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"
@@ -211,19 +211,20 @@ const Header: React.FC = () => {
             )}
           </AnimatePresence>
         </motion.button>
-        
-        {/* Desktop Navigation - Centered */}
+
         <nav className="hidden md:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
           {navItems.map((item, index) => {
             const sectionId = item.href.substring(1);
             const isActive = activeSection === sectionId;
-            
+
             return (
               <motion.a
                 key={item.href}
                 href={item.href}
                 className={`font-medium relative ${
-                  isActive ? 'text-gray-900' : 'text-gray-700 hover:text-gray-900'
+                  isActive
+                    ? "text-gray-900"
+                    : "text-gray-700 hover:text-gray-900"
                 }`}
                 variants={navItemVariants}
                 initial="initial"
@@ -246,9 +247,8 @@ const Header: React.FC = () => {
             );
           })}
         </nav>
-        
-        {/* Call to Action Button */}
-        <motion.div 
+
+        <motion.div
           className="hidden md:block"
           variants={buttonVariants}
           initial="initial"
@@ -260,8 +260,7 @@ const Header: React.FC = () => {
             Talk to Us
           </button>
         </motion.div>
-        
-        {/* Mobile Navigation with AnimatePresence for smooth transitions */}
+
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
@@ -272,7 +271,7 @@ const Header: React.FC = () => {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <motion.div 
+              <motion.div
                 className="absolute top-24 right-6 left-6 bg-[#FAF8F4] rounded-3xl  overflow-hidden border-2 border-black"
                 variants={mobileMenuVariants}
                 initial="closed"
@@ -284,15 +283,13 @@ const Header: React.FC = () => {
                     const sectionId = item.href.substring(1);
                     const isActive = activeSection === sectionId;
                     const isLast = index === navItems.length - 1;
-                    
+
                     return (
                       <motion.a
                         key={item.href}
                         href={item.href}
-                        className={`font-medium text-lg py-4 px-6 ${isLast ? '' : 'border-b border-gray-200'} ${
-                          isActive 
-                            ? 'text-gray-900 font-bold' 
-                            : 'text-gray-700'
+                        className={`font-medium text-lg py-4 px-6 ${isLast ? "" : "border-b border-gray-200"} ${
+                          isActive ? "text-gray-900 font-bold" : "text-gray-700"
                         } transition-colors`}
                         variants={mobileNavItemVariants}
                         initial="closed"

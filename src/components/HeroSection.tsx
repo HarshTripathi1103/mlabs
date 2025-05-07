@@ -17,7 +17,6 @@ const HeroSection: React.FC = () => {
     }
   }, [controls, isInView]);
 
-  // Animation variants
   const containerVariants = {
     hidden: {},
     visible: {
@@ -63,7 +62,6 @@ const HeroSection: React.FC = () => {
     },
   };
 
-  // Subtle hover animation for explore button
   const exploreHover = {
     rest: { x: 0, y: 0 },
     hover: {
@@ -115,7 +113,6 @@ const HeroSection: React.FC = () => {
           </motion.div>
         </motion.div>
 
-        
         <div className="relative w-full flex justify-between items-center px-4 mt-[-20px]">
           <motion.div
             className="hidden md:block text-gray-800 font-medium max-w-[260px]"
@@ -125,7 +122,6 @@ const HeroSection: React.FC = () => {
             to more people for less money
           </motion.div>
 
-         
           <motion.div
             className="flex items-center text-gray-800 font-medium cursor-pointer ml-auto"
             variants={exploreVariants}
@@ -138,7 +134,7 @@ const HeroSection: React.FC = () => {
               variants={exploreHover}
               className="flex items-center justify-center ml-1"
             >
-              <MoveDownRight size={20}  />
+              <MoveDownRight size={20} />
             </motion.div>
           </motion.div>
         </div>
