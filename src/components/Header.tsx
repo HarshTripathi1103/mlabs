@@ -163,7 +163,7 @@ const Header: React.FC = () => {
   return (
     <header className="sticky top-0 z-50 pb-8 px-6 md:px-12 bg-transparent">
       <motion.div 
-        className="flex items-center justify-between bg-[#FCF9F6]/95 backdrop-blur-sm rounded-xl p-4 relative "
+        className="flex items-center justify-between bg-[#FAF8F4]/95 backdrop-blur-sm rounded-xl p-4 relative "
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
@@ -273,7 +273,7 @@ const Header: React.FC = () => {
               transition={{ duration: 0.3 }}
             >
               <motion.div 
-                className="absolute top-24 right-6 left-6 bg-[#FCF9F6] rounded-3xl  overflow-hidden border-2 border-black"
+                className="absolute top-24 right-6 left-6 bg-[#FAF8F4] rounded-3xl  overflow-hidden border-2 border-black"
                 variants={mobileMenuVariants}
                 initial="closed"
                 animate="open"

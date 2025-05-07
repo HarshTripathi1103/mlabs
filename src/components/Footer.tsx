@@ -51,7 +51,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="px-6 md:px-12 pt-16 pb-8 bg-[#FCF9F6] relative" ref={footerRef}>
+    <footer className="px-6 md:px-12 pt-16 pb-8 bg-[#FAF8F4] relative" ref={footerRef}>
       {/* Animated horizontal line */}
       <div className="absolute top-0 left-6 md:left-12 right-6 md:right-12 h-[2px] overflow-hidden">
         <motion.div 
